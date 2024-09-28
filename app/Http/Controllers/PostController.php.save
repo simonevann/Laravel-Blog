@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\PostCategories;
+use App\Models\Posts;
+
+class PostController extends Controller
+{
+    public function index(Posts $post)
+    {
+	Log:info
+        return view('post.index', ['post' => $post]);
+    }
+
+    public function category(PostCategories $category)
+    {
+        $posts = Posts::whereHas('category', function ($query) use ($category) {
+            $query->where('name', $category);
+        })->get();
+
+        return view('post.category', compact('posts', 'category'));
+    }
+}
+        Log::info('Showing the user profile for user: {id}', ['id' => $id]);
