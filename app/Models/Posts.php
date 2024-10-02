@@ -14,7 +14,7 @@ class Posts extends Model
     public $photo;
     protected $table = 'posts';
     protected $primaryKey = 'id';
-    protected $fillable = ['title', 'slug', 'parts', 'category_id', 'meta_description'];
+    protected $fillable = ['title', 'slug', 'parts', 'category_id', 'meta_description','status'];
 
     public function parts()
     {

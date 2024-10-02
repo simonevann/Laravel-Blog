@@ -13,18 +13,20 @@ class PostsList extends Component
 
     public function mount()
     {
-        $this->posts = Posts::select('*')->orderBy('id', 'desc')->get();
         if ($this->categoryId) {
-            $this->posts = Posts::where('category_id', $this->categoryId)->orderBy('id', 'desc')->get();
+            $this->posts = Posts::where('category_id', $this->categoryId)->where('status', 1)->orderBy('id', 'desc')->get();
+        } else {
+            $this->posts = Posts::where('status', 1)->orderBy('id', 'desc')->get();
         }
     }
 
     #[On('refresh-post-list')]
     public function refreshPosts()
     {
-        $this->posts = Posts::select('*')->orderBy('id', 'desc')->get();
         if ($this->categoryId) {
-            $this->posts = Posts::where('category_id', $this->categoryId)->orderBy('id', 'desc')->get();
+            $this->posts = Posts::where('category_id', $this->categoryId)->where('status', 1)->orderBy('id', 'desc')->get();
+        } else {
+            $this->posts = Posts::where('status', 1)->orderBy('id', 'desc')->get();
         }
     }
 
